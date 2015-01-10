@@ -1,0 +1,35 @@
+<script>
+    var Animal = function (param) {
+        this.name = param.name;
+    }
+
+    Animal.prototype.getName = function () {
+        return this.name;
+    }
+
+    var Dog = function () {
+        Animal.prototype.constructor.apply(this, arguments);
+    };
+    Dog.prototype = Animal.prototype;
+
+    function hasWhiteSpace(s) {
+        return /\s/g.test(s);
+    }
+
+    Dog.prototype.gav = function () {
+        if (typeof this.name == 'undefined' || hasWhiteSpace(this.name) || !this.name) {
+            return 'Choose a name for your dog';
+        }
+        else {
+            return 'Dog ' + this.name + ' is sayig gav';
+        }
+
+    }
+
+    newDog = new Dog({name: 'Aban'});
+    console.log(newDog.gav());
+    console.log(newDog.getName() == 'garfild');
+    console.log(newDog.gav() === 'Dog Aban is sayig gav');
+
+
+</script>
