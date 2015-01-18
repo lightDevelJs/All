@@ -12,21 +12,26 @@
     };
     Dog.prototype = Animal.prototype;
 
-    function hasWhiteSpace(s) {
-        return /\s/g.test(s);
+    function trim(name) {
+        return name.replace(/(^\s+) | (\s*$)/g, "").replace(/\s{2,}/g, " ");
     }
+	
+	function isEmpty(name) {
+		if(typeof(name) == "undefined") return true;
+ 		return !/\d+|\w+/.test(name);	
+	}
 
     Dog.prototype.gav = function () {
-        if (typeof this.name == 'undefined' || hasWhiteSpace(this.name) || !this.name) {
+        if (isEmpty(this.name)) {
             return 'Choose a name for your dog';
         }
         else {
-            return 'Dog ' + this.name + ' is sayig gav';
+            return 'Dog ' + trim(this.name) + ' is sayig gav';
         }
 
     }
 
-    newDog = new Dog({name: 'Aban'});
+    newDog = new Dog({name: "  First    Second                       azaza adasdasd   "});
     console.log(newDog.gav());
     console.log(newDog.getName() == 'garfild');
     console.log(newDog.gav() === 'Dog Aban is sayig gav');
